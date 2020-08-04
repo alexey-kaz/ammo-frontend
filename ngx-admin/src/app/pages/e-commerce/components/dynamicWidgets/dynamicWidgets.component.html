@@ -1,0 +1,17 @@
+<div class="toolbar">
+  <button nbButton (click)="dynamicWidgetsService.addwidgetA()"><nb-icon icon="plus-circle-outline"></nb-icon>add widget A</button>
+  <button nbButton (click)="dynamicWidgetsService.addwidgetB()"><nb-icon icon="plus-circle-outline"></nb-icon>add widget B</button>
+  <button nbButton (click)="dynamicWidgetsService.addwidgetC()"><nb-icon icon="plus-circle-outline"></nb-icon>add widget C</button>
+</div>
+
+<gridster [options]="options" class = "grid">
+  <gridster-item [item]="item" *ngFor="let item of dashboard" class = "griditem">
+      <nb-card-body>
+        <button nbButton class="remove-button" (click)="dynamicWidgetsService.deleteItem(item.id)">
+          <nb-icon icon="close-square-outline"></nb-icon>
+          Delete Item
+        </button>
+        <app-parent-dynamic [widget]="item" [resizeEvent]="resizeEvent"></app-parent-dynamic>
+      </nb-card-body>
+  </gridster-item>
+</gridster>

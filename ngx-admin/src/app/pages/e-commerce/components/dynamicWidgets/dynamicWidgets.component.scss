@@ -1,0 +1,28 @@
+.toolbar {
+    height: 60px;
+    display: flex;
+    background: powderblue;
+}
+.grid {
+    display: flex;
+    height: calc(100vh - 180px);
+    overflow: auto;
+    flex: 1 auto;
+    background: cadetblue;
+    width: 100%;
+}
+.griditem {
+    background: powderblue;
+    flex: auto;
+}
+button {
+    height: 30px;
+    text-align: center;
+    margin: 5px;
+    display: flex;
+}
+
+nb-card-header {
+  margin: 2px;
+}
+
