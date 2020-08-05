@@ -1,18 +1,19 @@
 .toolbar {
     height: 60px;
     display: flex;
-    background: powderblue;
+    background: white;
 }
 .grid {
     display: flex;
     height: calc(100vh - 180px);
     overflow: auto;
     flex: 1 auto;
-    background: cadetblue;
+    background-color: black;
+  background-image: linear-gradient(#e2e5ea, #d4d7dc, #e2e5ea);
     width: 100%;
 }
 .griditem {
-    background: powderblue;
+    background: white;
     flex: auto;
 }
 button {

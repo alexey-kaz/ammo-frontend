@@ -6,7 +6,7 @@ import {
   OnDestroy,
   OnInit,
   ViewEncapsulation,
-  ChangeDetectorRef
+  ChangeDetectorRef,
 } from '@angular/core';
 import {Subscription} from 'rxjs';
 import {GridsterItem} from 'angular-gridster2';
@@ -16,12 +16,13 @@ import {HttpClient} from '@angular/common/http';
   selector: 'app-widget-a',
   template: `
     <nb-card size = giant>
-      <nb-card-body [innerText]='movie'>
+      <nb-card-body style = 'background-color: black; color: white; font-family: Arial, Helvetica, sans-serif;
+       font-size: 24px;' [innerText]='movie'>
       </nb-card-body>
     </nb-card>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 
 export class WidgetAComponent implements OnInit, OnDestroy {

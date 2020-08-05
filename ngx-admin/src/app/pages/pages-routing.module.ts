@@ -9,12 +9,12 @@ const routes: Routes = [{
   component: PagesComponent,
   children: [
     {
-      path: 'dashboard',
+      path: 'ecommerce',
       component: ECommerceComponent,
     },
     {
       path: '**',
-      redirectTo: 'dashboard',
+      redirectTo: 'ecommerce',
       pathMatch: 'full',
     },
   ],

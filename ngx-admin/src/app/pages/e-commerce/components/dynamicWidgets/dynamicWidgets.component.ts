@@ -8,7 +8,7 @@ import {DynamicWidgetsService} from '../../services/dynamic-widgets.service';
   templateUrl: './dynamicWidgets.component.html',
   styleUrls: ['./dynamicWidgets.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 
 export class DynamicWidgetsComponent implements OnInit {

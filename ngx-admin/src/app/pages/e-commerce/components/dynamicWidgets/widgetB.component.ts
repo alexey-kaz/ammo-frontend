@@ -14,7 +14,7 @@ import {GridsterItem} from 'angular-gridster2';
     </nb-card>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class WidgetBComponent implements OnInit, OnDestroy {
   @Input()

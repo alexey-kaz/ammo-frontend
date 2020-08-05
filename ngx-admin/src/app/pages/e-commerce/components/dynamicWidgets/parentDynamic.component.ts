@@ -5,7 +5,7 @@ import {ChangeDetectionStrategy, Component, Input, ViewEncapsulation} from '@ang
   selector: 'app-parent-dynamic',
   templateUrl: './parentDynamic.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class ParentDynamicComponent {
   @Input()
