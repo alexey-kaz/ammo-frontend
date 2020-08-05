@@ -15,12 +15,12 @@ import { ThemeModule } from '../../@theme/theme.module';
 import { ECommerceComponent } from './e-commerce.component';
 import { ChartModule } from 'angular2-chartjs';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
-import {DynamicWidgetsComponent} from "./components/dynamicWidgets/dynamicWidgets.component";
-import {ParentDynamicComponent} from "./components/dynamicWidgets/parentDynamic.component";
-import {GridsterModule} from "angular-gridster2";
-import {WidgetAComponent} from "./components/dynamicWidgets/widgetA.component";
-import {WidgetBComponent} from "./components/dynamicWidgets/widgetB.component";
-import {WidgetCComponent} from "./components/dynamicWidgets/widgetC.component";
+import {DynamicWidgetsComponent} from './components/dynamicWidgets/dynamicWidgets.component';
+import {ParentDynamicComponent} from './components/dynamicWidgets/parentDynamic.component';
+import {GridsterModule} from 'angular-gridster2';
+import {WidgetAComponent} from './components/dynamicWidgets/widgetA.component';
+import {WidgetBComponent} from './components/dynamicWidgets/widgetB.component';
+import {WidgetCComponent} from './components/dynamicWidgets/widgetC.component';
 
 @NgModule({
   imports: [
@@ -51,6 +51,6 @@ import {WidgetCComponent} from "./components/dynamicWidgets/widgetC.component";
   providers: [
   ],
   entryComponents: [
-  ]
+  ],
 })
 export class ECommerceModule { }

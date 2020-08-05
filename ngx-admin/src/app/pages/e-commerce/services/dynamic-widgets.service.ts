@@ -3,7 +3,7 @@ import {UUID} from 'angular2-uuid';
 import {GridsterConfig, GridsterItem} from 'angular-gridster2';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DynamicWidgetsService {
   public options: GridsterConfig = {
@@ -13,7 +13,7 @@ export class DynamicWidgetsService {
     },
     pushItems: true,
     resizable: {
-      enabled: true
+      enabled: true,
     },
     displayGrid: 'always',
   };
@@ -26,7 +26,7 @@ export class DynamicWidgetsService {
       id: UUID.UUID(),
       rows: 2,
       x: 0,
-      y: 0
+      y: 0,
     });
   }
   addwidgetB(): void {
@@ -36,7 +36,7 @@ export class DynamicWidgetsService {
       id: UUID.UUID(),
       rows: 2,
       x: 0,
-      y: 0
+      y: 0,
     });
   }
   addwidgetC(): void {
@@ -46,12 +46,12 @@ export class DynamicWidgetsService {
       id: UUID.UUID(),
       rows: 2,
       x: 0,
-      y: 0
+      y: 0,
     });
   }
   deleteItem(id: string): void {
     const item = this.dashboard.find(d => d.id === id);
     this.dashboard.splice(this.dashboard.indexOf(item), 1);
-    console.log('item deleted')
+    console.log('item deleted');
   }
 }
