@@ -49,6 +49,16 @@ export class DynamicWidgetsService {
       y: 0,
     });
   }
+  addwidgetD(): void {
+    this.dashboard.push({
+      type: 'widgetD',
+      cols: 2,
+      id: UUID.UUID(),
+      rows: 2,
+      x: 0,
+      y: 0,
+    });
+  }
   deleteItem(id: string): void {
     const item = this.dashboard.find(d => d.id === id);
     this.dashboard.splice(this.dashboard.indexOf(item), 1);

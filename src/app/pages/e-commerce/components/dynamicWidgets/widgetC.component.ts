@@ -1,15 +1,15 @@
 import {ChangeDetectionStrategy, Component, EventEmitter,
-  Input, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+  Input, OnDestroy, OnInit, ViewEncapsulation, ChangeDetectorRef} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {GridsterItem} from 'angular-gridster2';
+import {HttpClient} from '@angular/common/http';
 
 
 @Component({
   selector: 'app-widget-c',
   template: `
     <nb-card>
-      <nb-card-body>
-        {{widget.type}} – Здесь что-то будет
+      <nb-card-body  [innerText]='data'>
       </nb-card-body>
     </nb-card>
   `,
@@ -23,6 +23,13 @@ export class WidgetCComponent implements OnInit, OnDestroy {
   resizeEvent: EventEmitter<GridsterItem>;
 
   resizeSub: Subscription;
+  data;
+  private refreshIntervalId;
+  constructor(private http: HttpClient, private cd: ChangeDetectorRef) {}
+  subscriptions: Subscription = new Subscription();
+  change_sub: Subscription;
+  change: boolean;
+  delete_sub: Subscription;
 
   ngOnInit(): void {
     this.resizeSub = this.resizeEvent.subscribe((widget) => {
@@ -31,6 +38,24 @@ export class WidgetCComponent implements OnInit, OnDestroy {
         console.log(widget);
       }
     });
+
+    this.subscriptions = this.http.get('http://localhost:3000/ram',
+      { responseType: 'text'}).subscribe((data: any) => {
+      this.data = data;
+      // console.log(data);
+      this.cd.detectChanges();
+    });
+    this.refreshIntervalId = setInterval( () => {
+
+        this.subscriptions = this.http.get('http://localhost:3000/ram',
+          { responseType: 'text'}).subscribe((data: any) => {
+          this.data = data;
+          // console.log(data);
+          this.cd.detectChanges();
+        });
+
+    }, 1000);
+
   }
 
   ngOnDestroy(): void {

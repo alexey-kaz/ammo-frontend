@@ -6,10 +6,9 @@ import {HttpClient} from '@angular/common/http';
 
 
 @Component({
-  selector: 'app-widget-b',
+  selector: 'app-widget-d',
   template: `
     <nb-card>
-
       <nb-card-body  [innerText]='data'>
       </nb-card-body>
     </nb-card>
@@ -17,7 +16,7 @@ import {HttpClient} from '@angular/common/http';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
-export class WidgetBComponent implements OnInit, OnDestroy {
+export class WidgetDComponent implements OnInit, OnDestroy {
   @Input()
   widget;
   @Input()
@@ -40,7 +39,7 @@ export class WidgetBComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.subscriptions = this.http.get('http://localhost:3000/cpu',
+    this.subscriptions = this.http.get('http://localhost:3000/uptime',
       { responseType: 'text'}).subscribe((data: any) => {
       this.data = data;
       // console.log(data);
@@ -48,12 +47,12 @@ export class WidgetBComponent implements OnInit, OnDestroy {
     });
     this.refreshIntervalId = setInterval( () => {
 
-        this.subscriptions = this.http.get('http://localhost:3000/cpu',
-          { responseType: 'text'}).subscribe((data: any) => {
-          this.data = data;
-          // console.log(data);
-          this.cd.detectChanges();
-        });
+      this.subscriptions = this.http.get('http://localhost:3000/uptime',
+        { responseType: 'text'}).subscribe((data: any) => {
+        this.data = data;
+        // console.log(data);
+        this.cd.detectChanges();
+      });
 
     }, 1000);
 

@@ -3,7 +3,6 @@ import {
   NbButtonModule,
   NbCardModule,
   NbProgressBarModule,
-  NbTabsetModule,
   NbUserModule,
   NbIconModule,
   NbSelectModule,
@@ -11,7 +10,6 @@ import {
 } from '@nebular/theme';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { ThemeModule } from '../../@theme/theme.module';
 import { ECommerceComponent } from './e-commerce.component';
 import { ChartModule } from 'angular2-chartjs';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
@@ -21,14 +19,13 @@ import {GridsterModule} from 'angular-gridster2';
 import {WidgetAComponent} from './components/dynamicWidgets/widgetA.component';
 import {WidgetBComponent} from './components/dynamicWidgets/widgetB.component';
 import {WidgetCComponent} from './components/dynamicWidgets/widgetC.component';
+import {WidgetDComponent} from "./components/dynamicWidgets/widgetD.component";
 
 @NgModule({
   imports: [
-    ThemeModule,
     NbCardModule,
     NbUserModule,
     NbButtonModule,
-    NbTabsetModule,
     NbSelectModule,
     NbListModule,
     ChartModule,
@@ -47,8 +44,10 @@ import {WidgetCComponent} from './components/dynamicWidgets/widgetC.component';
     WidgetAComponent,
     WidgetBComponent,
     WidgetCComponent,
+    WidgetDComponent,
   ],
-  providers: [
+
+providers: [
   ],
   entryComponents: [
   ],

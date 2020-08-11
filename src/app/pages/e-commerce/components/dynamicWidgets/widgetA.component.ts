@@ -15,9 +15,9 @@ import {HttpClient} from '@angular/common/http';
 @Component({
   selector: 'app-widget-a',
   template: `
-    <nb-card size = giant>
-      <nb-card-body style = 'background-color: black; color: white; font-family: Arial, Helvetica, sans-serif;
-       font-size: 24px;' [innerText]='movie'>
+    <nb-card size=giant>
+      <nb-card-body style='background-color: black; color: white; font-family: Arial, Helvetica, sans-serif;
+       font-size: 24px;' [innerText]='data'>
       </nb-card-body>
     </nb-card>
   `,
@@ -32,7 +32,7 @@ export class WidgetAComponent implements OnInit, OnDestroy {
   resizeEvent: EventEmitter<GridsterItem>;
 
   resizeSub: Subscription;
-  movie;
+  data;
   private refreshIntervalId;
   constructor(private http: HttpClient, private cd: ChangeDetectorRef) {}
   subscriptions: Subscription = new Subscription();
@@ -49,7 +49,7 @@ export class WidgetAComponent implements OnInit, OnDestroy {
     });
     this.subscriptions = this.http.get('http://localhost:3000/loglistener',
       { responseType: 'text'}).subscribe((data: any) => {
-      this.movie = data;
+      this.data = data;
       // console.log(data);
       this.cd.detectChanges();
     });
@@ -62,7 +62,7 @@ export class WidgetAComponent implements OnInit, OnDestroy {
       if (this.change === true) {
         this.subscriptions = this.http.get('http://localhost:3000/data',
           { responseType: 'text'}).subscribe((data: any) => {
-          this.movie = data;
+          this.data = data;
           // console.log(data);
           this.cd.detectChanges();
         });

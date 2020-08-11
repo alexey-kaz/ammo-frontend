@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, OnInit, ViewEncapsulation} from '@angular/core';
-
+import { Tab } from '../tab.model';
 import {GridsterConfig, GridsterItem} from 'angular-gridster2';
 import {DynamicWidgetsService} from '../../services/dynamic-widgets.service';
 
@@ -11,7 +11,8 @@ import {DynamicWidgetsService} from '../../services/dynamic-widgets.service';
   encapsulation: ViewEncapsulation.None,
 })
 
-export class DynamicWidgetsComponent implements OnInit {
+export class DynamicWidgetsComponent {
+
   resizeEvent: EventEmitter<GridsterItem> = new EventEmitter<GridsterItem>();
   constructor(public dynamicWidgetsService: DynamicWidgetsService) {
   }
@@ -21,5 +22,4 @@ export class DynamicWidgetsComponent implements OnInit {
   get dashboard(): GridsterItem[] {
     return this.dynamicWidgetsService.dashboard;
   }
-  ngOnInit(): void {}
 }
