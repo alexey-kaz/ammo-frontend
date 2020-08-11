@@ -1,31 +1,23 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  OnDestroy,
-  OnInit,
-  ViewEncapsulation,
-  ChangeDetectorRef,
-} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter,
+  Input, OnDestroy, OnInit, ViewEncapsulation, ChangeDetectorRef} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {GridsterItem} from 'angular-gridster2';
 import {HttpClient} from '@angular/common/http';
 
+
 @Component({
-  selector: 'app-widget-a',
+  selector: 'app-widget-cpu',
   template: `
-    <nb-card size=giant>
-      <nb-card-body style='background-color: black; color: white; font-family: Arial, Helvetica, sans-serif;
-       font-size: 24px;' [innerText]='data'>
+    <nb-card>
+
+      <nb-card-body  [innerText]='data'>
       </nb-card-body>
     </nb-card>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
-
-export class WidgetAComponent implements OnInit, OnDestroy {
+export class CPUWidgetComponent implements OnInit, OnDestroy {
   @Input()
   widget;
   @Input()
@@ -47,43 +39,27 @@ export class WidgetAComponent implements OnInit, OnDestroy {
         console.log(widget);
       }
     });
-    this.subscriptions = this.http.get('http://localhost:3000/loglistener',
+
+    this.subscriptions = this.http.get('http://localhost:3000/cpu',
       { responseType: 'text'}).subscribe((data: any) => {
       this.data = data;
       // console.log(data);
       this.cd.detectChanges();
     });
     this.refreshIntervalId = setInterval( () => {
-      this.change_sub = this.http.get('http://localhost:3000/change',
-        { responseType: 'text'}).subscribe((data: any) => {
-        this.change = JSON.parse(data);
-        // console.log(this.change);
-      });
-      if (this.change === true) {
-        this.subscriptions = this.http.get('http://localhost:3000/data',
+
+        this.subscriptions = this.http.get('http://localhost:3000/cpu',
           { responseType: 'text'}).subscribe((data: any) => {
           this.data = data;
           // console.log(data);
           this.cd.detectChanges();
         });
-      }
+
     }, 1000);
 
   }
 
   ngOnDestroy(): void {
-    clearInterval(this.refreshIntervalId);
-    this.delete_sub = this.http.get('http://localhost:3000/delete', { responseType: 'text'}).subscribe((data: any) => {
-      this.change = JSON.parse(data);
-      // console.log(this.change);
-    });
-    // console.log('log delete');
     this.resizeSub.unsubscribe();
-    this.subscriptions.unsubscribe();
-    this.change_sub.unsubscribe();
-    this.delete_sub.unsubscribe();
   }
 }
-
-
-

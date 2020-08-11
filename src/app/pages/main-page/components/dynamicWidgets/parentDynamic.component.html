@@ -1,0 +1,4 @@
+<app-widget-log [widget]="widget" [resizeEvent]="resizeEvent" *ngIf="widget.type === 'widgetLog'"></app-widget-log>
+<app-widget-cpu [widget]="widget" [resizeEvent]="resizeEvent" *ngIf="widget.type === 'widgetCPU'"></app-widget-cpu>
+<app-widget-ram [widget]="widget" [resizeEvent]="resizeEvent" *ngIf="widget.type === 'widgetRAM'"></app-widget-ram>
+<app-widget-uptime [widget]="widget" [resizeEvent]="resizeEvent" *ngIf="widget.type === 'widgetUptime'"></app-widget-uptime>

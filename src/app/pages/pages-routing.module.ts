@@ -2,19 +2,19 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
-import { ECommerceComponent } from './e-commerce/e-commerce.component';
+import { MainPageComponent } from './main-page/main-page.component';
 
 const routes: Routes = [{
   path: '',
   component: PagesComponent,
   children: [
     {
-      path: 'ecommerce',
-      component: ECommerceComponent,
+      path: 'dashboard',
+      component: MainPageComponent,
     },
     {
       path: '**',
-      redirectTo: 'ecommerce',
+      redirectTo: 'dashboard',
       pathMatch: 'full',
     },
   ],

@@ -6,7 +6,7 @@ import {HttpClient} from '@angular/common/http';
 
 
 @Component({
-  selector: 'app-widget-c',
+  selector: 'app-widget-ram',
   template: `
     <nb-card>
       <nb-card-body  [innerText]='data'>
@@ -16,7 +16,7 @@ import {HttpClient} from '@angular/common/http';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
-export class WidgetCComponent implements OnInit, OnDestroy {
+export class RAMWidgetComponent implements OnInit, OnDestroy {
   @Input()
   widget;
   @Input()

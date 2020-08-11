@@ -35,12 +35,12 @@ gridster-item div.button-holder {
   cursor: pointer;
 }
 
-.nb-theme-default app-widget-a {
+.nb-theme-default app-widget-log {
   background-color: #000000;
   color: white;
 }
 
-app-parent-dynamic, app-widget-a, app-widget-b, app-widget-c {
+app-parent-dynamic, app-widget-log, app-widget-cpu, app-widget-ram {
   display: flex;
   height: 100%;
   width: 100%;

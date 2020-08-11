@@ -10,16 +10,16 @@ import {
 } from '@nebular/theme';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { ECommerceComponent } from './e-commerce.component';
+import { MainPageComponent } from './main-page.component';
 import { ChartModule } from 'angular2-chartjs';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import {DynamicWidgetsComponent} from './components/dynamicWidgets/dynamicWidgets.component';
 import {ParentDynamicComponent} from './components/dynamicWidgets/parentDynamic.component';
 import {GridsterModule} from 'angular-gridster2';
-import {WidgetAComponent} from './components/dynamicWidgets/widgetA.component';
-import {WidgetBComponent} from './components/dynamicWidgets/widgetB.component';
-import {WidgetCComponent} from './components/dynamicWidgets/widgetC.component';
-import {WidgetDComponent} from "./components/dynamicWidgets/widgetD.component";
+import {LogWidgetComponent} from './components/dynamicWidgets/widgets/log-widget.component';
+import {CPUWidgetComponent} from './components/dynamicWidgets/widgets/cpu-widget.component';
+import {RAMWidgetComponent} from './components/dynamicWidgets/widgets/ram-widget.component';
+import {UptimeWidgetComponent} from './components/dynamicWidgets/widgets/uptime-widget.component';
 
 @NgModule({
   imports: [
@@ -38,13 +38,13 @@ import {WidgetDComponent} from "./components/dynamicWidgets/widgetD.component";
     NbIconModule,
   ],
   declarations: [
-    ECommerceComponent,
+    MainPageComponent,
     DynamicWidgetsComponent,
     ParentDynamicComponent,
-    WidgetAComponent,
-    WidgetBComponent,
-    WidgetCComponent,
-    WidgetDComponent,
+    LogWidgetComponent,
+    CPUWidgetComponent,
+    RAMWidgetComponent,
+    UptimeWidgetComponent,
   ],
 
 providers: [
@@ -52,4 +52,4 @@ providers: [
   entryComponents: [
   ],
 })
-export class ECommerceModule { }
+export class MainPageModule { }

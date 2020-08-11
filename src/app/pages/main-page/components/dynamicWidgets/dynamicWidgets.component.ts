@@ -1,5 +1,4 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, OnInit, ViewEncapsulation} from '@angular/core';
-import { Tab } from '../tab.model';
+import {ChangeDetectionStrategy, Component, EventEmitter, ViewEncapsulation} from '@angular/core';
 import {GridsterConfig, GridsterItem} from 'angular-gridster2';
 import {DynamicWidgetsService} from '../../services/dynamic-widgets.service';
 

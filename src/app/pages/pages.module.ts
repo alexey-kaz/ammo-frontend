@@ -2,15 +2,15 @@ import { NgModule } from '@angular/core';
 import { NbMenuModule } from '@nebular/theme';
 
 import { PagesComponent } from './pages.component';
-import { ECommerceModule } from './e-commerce/e-commerce.module';
+import { MainPageModule } from './main-page/main-page.module';
 import { PagesRoutingModule } from './pages-routing.module';
-import {ThemeModule} from "../app/@theme/theme.module";
+import {ThemeModule} from '../@theme/theme.module';
 
 @NgModule({
   imports: [
     PagesRoutingModule,
     NbMenuModule,
-    ECommerceModule,
+    MainPageModule,
     ThemeModule,
   ],
   declarations: [

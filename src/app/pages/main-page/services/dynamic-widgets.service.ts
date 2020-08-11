@@ -19,9 +19,9 @@ export class DynamicWidgetsService {
   };
   public dashboard: GridsterItem[] = [];
   constructor() { }
-  addwidgetA(): void {
+  addWidgetLog(): void {
     this.dashboard.push({
-      type: 'widgetA',
+      type: 'widgetLog',
       cols: 2,
       id: UUID.UUID(),
       rows: 2,
@@ -29,9 +29,9 @@ export class DynamicWidgetsService {
       y: 0,
     });
   }
-  addwidgetB(): void {
+  addWidgetCPU(): void {
     this.dashboard.push({
-      type: 'widgetB',
+      type: 'widgetCPU',
       cols: 2,
       id: UUID.UUID(),
       rows: 2,
@@ -39,9 +39,9 @@ export class DynamicWidgetsService {
       y: 0,
     });
   }
-  addwidgetC(): void {
+  addWidgetRAM(): void {
     this.dashboard.push({
-      type: 'widgetC',
+      type: 'widgetRAM',
       cols: 2,
       id: UUID.UUID(),
       rows: 2,
@@ -49,9 +49,9 @@ export class DynamicWidgetsService {
       y: 0,
     });
   }
-  addwidgetD(): void {
+  addWidgetUptime(): void {
     this.dashboard.push({
-      type: 'widgetD',
+      type: 'widgetUptime',
       cols: 2,
       id: UUID.UUID(),
       rows: 2,
