@@ -3,6 +3,10 @@ router-outlet + * {
   overflow: auto;
 }
 
+ng-template{
+  color: black;
+}
+
 gridster-item div.button-holder {
   width: 100%;
   height: 100%;

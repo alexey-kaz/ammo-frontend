@@ -2,7 +2,18 @@
 
   <nb-layout-column>
 
-    <app-dynamic-widgets></app-dynamic-widgets>
+    <button nbButton (click)="addNewTab()" style="background: white">Add new tab</button>
+
+    <nb-tabset fullWidth style="background: white" >
+      <nb-tab *ngFor="let tab of tabs; let tabIndex = index" tabTitle="Tab {{tabIndex+1}}" >
+          <button nbButton (click)="removeTab(tabIndex);" style="background: #edf1f7">
+            <nb-icon icon="close-square-outline"></nb-icon>
+            Delete Tab {{tabIndex + 1}}
+          </button>
+          <app-dynamic-widgets></app-dynamic-widgets>
+      </nb-tab>
+
+    </nb-tabset>
 
   </nb-layout-column>
 
