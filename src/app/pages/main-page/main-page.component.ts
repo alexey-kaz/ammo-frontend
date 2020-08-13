@@ -20,17 +20,14 @@ export class MainPageComponent implements OnInit {
     });
   }
 
-  tabChanged(event) {
-    console.log("tab changed");
-  }
-
   addNewTab() {
     this.tabService.addTab(
-      new Tab(DynamicWidgetsComponent, "Dynamic Widgets Comp", { parent: "AppComponent" }),
+      new Tab(DynamicWidgetsComponent, "Dynamic Widgets Comp"),
     );
   }
 
   removeTab(index: number): void {
     this.tabService.removeTab(index);
   }
+
 }

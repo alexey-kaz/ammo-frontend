@@ -7,8 +7,7 @@ export class Tab {
   public active: boolean;
   public component: Type<any>;
 
-  constructor(component: Type<any>, title: string, tabData: any) {
-    this.tabData = tabData;
+  constructor(component: Type<any>, title: string) {
     this.component = component;
     this.title = title;
   }

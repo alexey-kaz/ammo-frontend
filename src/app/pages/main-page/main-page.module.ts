@@ -24,6 +24,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {TabService} from "./tab.service";
 import {TabContentComponent} from "./tab-content.component";
 import {ContentContainerDirective} from "./content-container.directive";
+import {MatTabsModule} from "@angular/material/tabs";
 
 @NgModule({
   imports: [
@@ -54,6 +55,7 @@ import {ContentContainerDirective} from "./content-container.directive";
     NbCardModule,
     GridsterModule,
     NbIconModule,
+    MatTabsModule,
   ],
   declarations: [
     MainPageComponent,
