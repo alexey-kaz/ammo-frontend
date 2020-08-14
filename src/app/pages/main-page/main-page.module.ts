@@ -6,7 +6,7 @@ import {
   NbUserModule,
   NbIconModule,
   NbSelectModule,
-  NbListModule, NbLayoutModule,
+  NbListModule, NbLayoutModule, NbTabsetModule,
 } from '@nebular/theme';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
@@ -20,6 +20,11 @@ import {LogWidgetComponent} from './components/dynamicWidgets/widgets/log-widget
 import {CPUWidgetComponent} from './components/dynamicWidgets/widgets/cpu-widget.component';
 import {RAMWidgetComponent} from './components/dynamicWidgets/widgets/ram-widget.component';
 import {UptimeWidgetComponent} from './components/dynamicWidgets/widgets/uptime-widget.component';
+import {HttpClientModule} from "@angular/common/http";
+import {TabService} from "./tab.service";
+import {TabContentComponent} from "./tab-content.component";
+import {ContentContainerDirective} from "./content-container.directive";
+import {MatTabsModule} from "@angular/material/tabs";
 
 @NgModule({
   imports: [
@@ -36,9 +41,26 @@ import {UptimeWidgetComponent} from './components/dynamicWidgets/widgets/uptime-
     NbLayoutModule,
     GridsterModule,
     NbIconModule,
+    NbTabsetModule,
+    HttpClientModule,
+    NbCardModule,
+    NbUserModule,
+    NbButtonModule,
+    NbSelectModule,
+    NbListModule,
+    NbProgressBarModule,
+    NbLayoutModule,
+    GridsterModule,
+    NbIconModule,
+    NbCardModule,
+    GridsterModule,
+    NbIconModule,
+    MatTabsModule,
   ],
   declarations: [
     MainPageComponent,
+    TabContentComponent,
+    ContentContainerDirective,
     DynamicWidgetsComponent,
     ParentDynamicComponent,
     LogWidgetComponent,
@@ -47,9 +69,8 @@ import {UptimeWidgetComponent} from './components/dynamicWidgets/widgets/uptime-
     UptimeWidgetComponent,
   ],
 
-providers: [
-  ],
-  entryComponents: [
-  ],
+providers: [ TabService ],
+  bootstrap: [MainPageComponent],
+  entryComponents: [DynamicWidgetsComponent],
 })
 export class MainPageModule { }

@@ -1,19 +1,16 @@
 <div class="toolbar">
-  <button nbButton (click)="dynamicWidgetsService.addWidgetLog()"><nb-icon icon="plus-circle-outline"></nb-icon>add widget .log</button>
-  <button nbButton (click)="dynamicWidgetsService.addWidgetCPU()"><nb-icon icon="plus-circle-outline"></nb-icon>add widget CPU</button>
-  <button nbButton (click)="dynamicWidgetsService.addWidgetRAM()"><nb-icon icon="plus-circle-outline"></nb-icon>add widget RAM</button>
-  <button nbButton (click)="dynamicWidgetsService.addWidgetUptime()"><nb-icon icon="plus-circle-outline"></nb-icon>add widget Uptime</button>
+  <button nbButton (click)="addWidgetLog()"><nb-icon icon="plus-circle-outline"></nb-icon>add widget .log</button>
+  <button nbButton (click)="addWidgetCPU()"><nb-icon icon="plus-circle-outline"></nb-icon>add widget CPU</button>
+  <button nbButton (click)="addWidgetRAM()"><nb-icon icon="plus-circle-outline"></nb-icon>add widget RAM</button>
+  <button nbButton (click)="addWidgetUptime()"><nb-icon icon="plus-circle-outline"></nb-icon>add widget Uptime</button>
 </div>
 
-
-    <gridster [options]="options" class = "grid">
-      <gridster-item [item]="item" *ngFor="let item of dashboard" class = "griditem">
-          <nb-card-body>
-            <button nbButton class="remove-button" (click)="dynamicWidgetsService.deleteItem(item.id)">
-              <nb-icon icon="close-square-outline"></nb-icon>
-              Delete Item
-            </button>
-            <app-parent-dynamic [widget]="item" [resizeEvent]="resizeEvent"></app-parent-dynamic>
-          </nb-card-body>
-      </gridster-item>
-    </gridster>
+<gridster [options]="gridsterOptions" class = "grid">
+  <gridster-item [item]="item" *ngFor="let item of dashboard" class = "griditem">
+      <button nbButton class="remove-button" (click)="removeItem($event, item)">
+        <nb-icon icon="close-square-outline"></nb-icon>
+        Delete Item
+      </button>
+      <app-parent-dynamic [widget]="item" [resizeEvent]="resizeEvent"></app-parent-dynamic>
+  </gridster-item>
+</gridster>
