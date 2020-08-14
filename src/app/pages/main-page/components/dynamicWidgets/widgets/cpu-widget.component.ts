@@ -9,7 +9,6 @@ import {HttpClient} from '@angular/common/http';
   selector: 'app-widget-cpu',
   template: `
     <nb-card>
-
       <nb-card-body  [innerText]='data'>
       </nb-card-body>
     </nb-card>
@@ -32,6 +31,14 @@ export class CPUWidgetComponent implements OnInit, OnDestroy {
   change: boolean;
   delete_sub: Subscription;
 
+  getData(dataparse): void {
+    const data = JSON.parse(dataparse);
+    this.data = ("model: " + data[0].model + "\nspeed in MHz: " + data[0].speed +
+      "\nmilliseconds in user mode: " + data[0].times.user + "\nmilliseconds in sys mode: "
+      + data[0].times.sys + "\nmilliseconds in idle mode: " + data[0].times.idle);
+    this.cd.detectChanges();
+  }
+
   ngOnInit(): void {
     this.resizeSub = this.resizeEvent.subscribe((widget) => {
       if (widget === this.widget) { // or check id , type or whatever you have there
@@ -42,17 +49,13 @@ export class CPUWidgetComponent implements OnInit, OnDestroy {
 
     this.subscriptions = this.http.get('http://localhost:3000/cpu',
       { responseType: 'text'}).subscribe((data: any) => {
-      this.data = data;
-      // console.log(data);
-      this.cd.detectChanges();
+        this.getData(data);
     });
     this.refreshIntervalId = setInterval( () => {
 
         this.subscriptions = this.http.get('http://localhost:3000/cpu',
           { responseType: 'text'}).subscribe((data: any) => {
-          this.data = data;
-          // console.log(data);
-          this.cd.detectChanges();
+            this.getData(data);
         });
 
     }, 1000);
@@ -61,5 +64,6 @@ export class CPUWidgetComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.resizeSub.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 }

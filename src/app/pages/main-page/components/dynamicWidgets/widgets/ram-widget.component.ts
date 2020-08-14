@@ -31,6 +31,16 @@ export class RAMWidgetComponent implements OnInit, OnDestroy {
   change: boolean;
   delete_sub: Subscription;
 
+  getData(dataparse): void {
+    const filesize = require("filesize");
+    const data = JSON.parse(dataparse);
+    this.data = ("total: " + filesize(data.mem.total) + "\nfree: " + filesize(data.mem.free) +
+      "\nused: " + filesize(data.mem.used) + "\nactive: " + filesize(data.mem.active) + "\navailable: "
+      + filesize(data.mem.available));
+    // console.log(data);
+    this.cd.detectChanges();
+  }
+
   ngOnInit(): void {
     this.resizeSub = this.resizeEvent.subscribe((widget) => {
       if (widget === this.widget) { // or check id , type or whatever you have there
@@ -40,25 +50,20 @@ export class RAMWidgetComponent implements OnInit, OnDestroy {
     });
 
     this.subscriptions = this.http.get('http://localhost:3000/ram',
-      { responseType: 'text'}).subscribe((data: any) => {
-      this.data = data;
-      // console.log(data);
-      this.cd.detectChanges();
+      { responseType: 'text'}).subscribe((dataparse: any) => {
+      this.getData(dataparse);
     });
     this.refreshIntervalId = setInterval( () => {
-
         this.subscriptions = this.http.get('http://localhost:3000/ram',
-          { responseType: 'text'}).subscribe((data: any) => {
-          this.data = data;
-          // console.log(data);
-          this.cd.detectChanges();
+          { responseType: 'text'}).subscribe((dataparse: any) => {
+            this.getData(dataparse);
         });
-
     }, 1000);
 
   }
 
   ngOnDestroy(): void {
     this.resizeSub.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 }

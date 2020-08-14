@@ -5,9 +5,7 @@ import { DynamicWidgetsComponent} from "./components/dynamicWidgets/dynamicWidge
 
 @Injectable()
 export class TabService {
-  public tabs: Tab[] = [
-    new Tab(DynamicWidgetsComponent, "Dynamic Widgets Comp"),
-  ];
+  public tabs: Tab[] = [];
 
   public tabSub = new BehaviorSubject<Tab[]>(this.tabs);
 

@@ -31,6 +31,14 @@ export class UptimeWidgetComponent implements OnInit, OnDestroy {
   change: boolean;
   delete_sub: Subscription;
 
+  getData(dataparse): void {
+    const data = JSON.parse(dataparse);
+    this.data = ("Local (server) time: " + data.time.current + "\nUptime in number of seconds: " + data.time.uptime +
+      "\nTimezone: " + data.time.timezone + "\nTimezone name: "
+      + data.time.timezoneName + "\nProcess Uptime: " + data.processUptime);
+    this.cd.detectChanges();
+  }
+
   ngOnInit(): void {
     this.resizeSub = this.resizeEvent.subscribe((widget) => {
       if (widget === this.widget) { // or check id , type or whatever you have there
@@ -41,17 +49,13 @@ export class UptimeWidgetComponent implements OnInit, OnDestroy {
 
     this.subscriptions = this.http.get('http://localhost:3000/uptime',
       { responseType: 'text'}).subscribe((data: any) => {
-      this.data = data;
-      // console.log(data);
-      this.cd.detectChanges();
+      this.getData(data);
     });
     this.refreshIntervalId = setInterval( () => {
 
       this.subscriptions = this.http.get('http://localhost:3000/uptime',
         { responseType: 'text'}).subscribe((data: any) => {
-        this.data = data;
-        // console.log(data);
-        this.cd.detectChanges();
+        this.getData(data);
       });
 
     }, 1000);
@@ -60,5 +64,6 @@ export class UptimeWidgetComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.resizeSub.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 }
