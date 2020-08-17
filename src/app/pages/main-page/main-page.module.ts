@@ -21,7 +21,6 @@ import {CPUWidgetComponent} from './components/dynamicWidgets/widgets/cpu-widget
 import {RAMWidgetComponent} from './components/dynamicWidgets/widgets/ram-widget.component';
 import {UptimeWidgetComponent} from './components/dynamicWidgets/widgets/uptime-widget.component';
 import {HttpClientModule} from "@angular/common/http";
-import {TabService} from "./tab.service";
 import {TabContentComponent} from "./tab-content.component";
 import {ContentContainerDirective} from "./content-container.directive";
 import {MatTabsModule} from "@angular/material/tabs";
@@ -69,7 +68,7 @@ import {MatTabsModule} from "@angular/material/tabs";
     UptimeWidgetComponent,
   ],
 
-providers: [ TabService ],
+providers: [],
   bootstrap: [MainPageComponent],
   entryComponents: [DynamicWidgetsComponent],
 })
