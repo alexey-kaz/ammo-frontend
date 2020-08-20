@@ -1,21 +1,19 @@
 <nb-layout>
 
-  <nb-layout-column>
+  <nb-layout-column start="true">
 
-    <button nbButton (click)="addNewTab()" style="background: white">Add new tab</button>
-    <button nbButton (click)="saveAll()" style="background: white">Save all tabs</button>
+    <button nbButton (click)="getNewTab()" style="background: white">Add new tab</button>
     <button nbButton (click)="clearAll()" style="background: white">Clear all tabs</button>
-    <button nbButton (click)="loadSavedTabs()" style="background: white">Load saved tabs</button>
+    <button nbButton (click)="getTabs()" style="background: white">Load saved tabs</button>
+    <button nbButton (click)="getDeleteSaved()" style="background: white">Delete saved tabs & content</button>
 
-    <nb-tabset fullWidth style="background: white" >
-      <nb-tab *ngFor="let tab of tabs; let tabIndex = index" tabTitle="Tab {{tabIndex+1}}">
+    <nb-tabset fullWidth style="background: white" (changeTab)="onTabChange()">
+      <nb-tab *ngFor="let tab of tabs; let tabIndex = index;" tabTitle="Tab {{tabIndex+1}}" active="{{tabIndex===0}}">
           <button nbButton (click)="removeTab(tabIndex);" style="background: #edf1f7">
             <nb-icon icon="close-square-outline"></nb-icon>
             Delete Tab {{tabIndex + 1}}
           </button>
-        <div class="tab{{tabIndex + 1}}">
-          <app-dynamic-widgets id={{tabIndex+1}} [test]=(tabIndex)></app-dynamic-widgets>
-        </div>
+          <app-dynamic-widgets id={{tabIndex+1}} *ngIf="tabIndex >= 0" [tab_number]=(tabIndex)></app-dynamic-widgets>
       </nb-tab>
 
     </nb-tabset>

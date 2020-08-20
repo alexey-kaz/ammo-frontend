@@ -10,23 +10,14 @@ import {HttpClient} from "@angular/common/http";
 })
 export class MainPageComponent implements OnInit {
   tabs = new Array<Tab>();
-  savedTabs;
   public tabSub = new BehaviorSubject<Tab[]>(this.tabs);
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    this.savedTabs = this.tabs;
-    this.tabs.push(new Tab(DynamicWidgetsComponent, "Dynamic Widgets Comp"));
-    this.tabSub.subscribe(tabs => {
-      this.tabs = tabs;
-    });
-    this.http.get('http://localhost:3000/new_tab', { responseType: 'text'}).subscribe((data: any) => {
-      console.log('new tab');
-    });
-    console.log(this.tabs[0].component);
+    this.getTabs();
   }
 
-  addNewTab() {
+  getNewTab() {
     const url = (`http://localhost:3000/new_tab`);
     const tab = new Tab(DynamicWidgetsComponent, "Dynamic Widgets Comp");
     tab.id = this.tabs.length + 1;
@@ -35,6 +26,7 @@ export class MainPageComponent implements OnInit {
     this.http.get(url, { responseType: 'text'}).subscribe((data: any) => {
       console.log('new tab');
     });
+    // this.postTab(tab);
   }
 
   removeTab(index: number): void {
@@ -50,13 +42,29 @@ export class MainPageComponent implements OnInit {
     this.tabs = [];
   }
 
-  saveAll() {
-    this.savedTabs = this.tabs;
-    // console.log(this.savedTabs);
+  getTabs() {
+    console.log('get_tabs');
+    const url = (`http://localhost:3000/get_tabs`);
+    this.http.get(url, { responseType: 'text'}).subscribe((data: any) => {
+      const tabNum = JSON.parse(data);
+      this.tabs = [];
+      for (let i = 0; i < tabNum; i++)
+        this.tabs.push(new Tab(DynamicWidgetsComponent, "Dynamic Widgets Comp"));
+    });
+    console.log(this.tabs);
   }
 
-  loadSavedTabs() {
-    this.tabs = this.savedTabs;
-    this.savedTabs = [];
+  getDeleteSaved() {
+    console.log('get_delete_saved');
+    const url = (`http://localhost:3000/delete_all_saved`);
+    this.http.get(url, { responseType: 'text'}).subscribe((data: any) => {
+      console.log('get_delete_saved');
+    });
+  }
+
+  onTabChange() {
+    setTimeout(() => {
+      window.dispatchEvent(new Event('resize'));
+    }, 0);
   }
 }

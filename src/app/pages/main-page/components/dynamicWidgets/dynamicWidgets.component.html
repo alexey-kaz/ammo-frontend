@@ -10,7 +10,7 @@
   <button nbButton (click)="addWidgetUptime()"><nb-icon icon="plus-circle-outline"></nb-icon>add widget Uptime</button>
 </div>
 
-<gridster [options]="gridsterOptions" class = "grid">
+<gridster [options]="gridsterOptions" class = "grid" >
   <gridster-item [item]="item" *ngFor="let item of dashboard" class = "griditem">
       <button nbButton class="remove-button" (click)="removeItem($event, item)">
         <nb-icon icon="close-square-outline"></nb-icon>
