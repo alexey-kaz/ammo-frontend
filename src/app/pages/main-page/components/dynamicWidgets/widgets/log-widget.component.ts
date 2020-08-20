@@ -80,8 +80,6 @@ export class LogWidgetComponent implements OnInit, OnDestroy {
     // console.log('log delete');
     this.resizeSub.unsubscribe();
     this.subscriptions.unsubscribe();
-    this.change_sub.unsubscribe();
-    this.delete_sub.unsubscribe();
   }
 }
 
