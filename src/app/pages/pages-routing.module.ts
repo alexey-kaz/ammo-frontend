@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
 import { MainPageComponent } from './main-page/main-page.component';
+import { InfrastructureComponent } from './infrastructure/infrastructure.component';
 
 const routes: Routes = [{
   path: '',
@@ -11,6 +12,10 @@ const routes: Routes = [{
     {
       path: 'dashboard',
       component: MainPageComponent,
+    },
+    {
+      path: 'infrastructure',
+      component: InfrastructureComponent,
     },
     {
       path: '**',
