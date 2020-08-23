@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'ngx-infrastructure',
@@ -6,6 +6,11 @@ import { Component } from '@angular/core';
 })
 export class InfrastructureComponent {
   constructor() {}
-  selectedItem = '2';
+  values = new Array<string>();
+  selectedOption;
+  onKey(event: any) {
+    this.values.push(event.target.value);
+    console.log(this.values);
+  }
 }
 

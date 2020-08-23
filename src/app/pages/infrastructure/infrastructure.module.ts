@@ -4,17 +4,26 @@ import {
   NbSelectModule,
   NbLayoutModule,
   NbSidebarModule,
-  NbActionsModule,
+  NbActionsModule, NbInputModule,
 } from '@nebular/theme';
 import { InfrastructureComponent } from './infrastructure.component';
+import {FormsModule} from "@angular/forms";
+import {CommonModule} from "@angular/common";
 
 @NgModule({
   imports: [
+    FormsModule,
     NbCardModule,
     NbSelectModule,
     NbLayoutModule,
     NbSidebarModule,
     NbActionsModule,
+    NbLayoutModule,
+    NbInputModule,
+    CommonModule,
+  ],
+  declarations: [
+    InfrastructureComponent,
   ],
   bootstrap: [InfrastructureComponent],
 })

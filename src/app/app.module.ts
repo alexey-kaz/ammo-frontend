@@ -14,7 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 import {
   NbChatModule,
   NbDatepickerModule,
-  NbDialogModule,
+  NbDialogModule, NbInputModule,
   NbMenuModule,
   NbSidebarModule,
   NbToastrModule,
@@ -24,7 +24,6 @@ import {
 @NgModule({
   declarations: [AppComponent],
   imports: [
-
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
@@ -38,6 +37,7 @@ import {
     NbChatModule.forRoot({
       messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
     }),
+    NbInputModule,
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
   ],

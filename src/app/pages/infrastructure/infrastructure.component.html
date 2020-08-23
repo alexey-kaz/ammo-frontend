@@ -1,16 +1,16 @@
-<!--<div class="row">-->
-<!--  <div class="col-xxl-5">-->
-<!--    <nb-card size="medium">-->
-<!--      <nb-card-body>-->
-<!--        <nb-select placeholder="Select Showcase" [(selected)]="selectedItem">-->
-<!--          <nb-option value="">Option empty</nb-option>-->
-<!--          <nb-option value="0">Option 0</nb-option>-->
-<!--          <nb-option value="1">Option 1</nb-option>-->
-<!--          <nb-option value="2">Option 2</nb-option>-->
-<!--          <nb-option value="3">Option 3</nb-option>-->
-<!--          <nb-option value="4">Option 4</nb-option>-->
-<!--        </nb-select>-->
-<!--      </nb-card-body>-->
-<!--    </nb-card>-->
-<!--  </div>-->
-<!--</div>-->
+<nb-layout>
+  <nb-layout-column>
+    <nb-card>
+      <nb-card-body>
+        <label>
+          <input nbInput placeholder="Input Virtual Machine" (keyup.enter)="onKey($event)">
+        </label>
+        <div>
+          <nb-select placeholder="Select VM" [(selected)]="selectedOption">
+            <nb-option *ngFor="let val of values" [value]="val"> {{val}} </nb-option>
+          </nb-select>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </nb-layout-column>
+</nb-layout>

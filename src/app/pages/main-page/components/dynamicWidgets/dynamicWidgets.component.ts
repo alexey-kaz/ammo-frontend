@@ -1,4 +1,11 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, ViewEncapsulation} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  ViewEncapsulation,
+  OnInit, ChangeDetectorRef,
+} from '@angular/core';
 import {GridsterConfig, GridsterItem} from 'angular-gridster2';
 import {UUID} from "angular2-uuid";
 import {HttpClient} from "@angular/common/http";
@@ -7,15 +14,20 @@ import {HttpClient} from "@angular/common/http";
   selector: 'app-dynamic-widgets',
   templateUrl: './dynamicWidgets.component.html',
   styleUrls: ['./dynamicWidgets.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.Default,
   encapsulation: ViewEncapsulation.None,
 })
 
-export class DynamicWidgetsComponent {
-  @Input() test;
+export class DynamicWidgetsComponent implements OnInit {
+  @Input() tab_number;
   public dashboard: GridsterItem[] = [];
   resizeEvent: EventEmitter<GridsterItem> = new EventEmitter<GridsterItem>();
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private cd: ChangeDetectorRef) { }
+
+  ngOnInit() {
+    this.getDash();
+  }
+
   public gridsterOptions: GridsterConfig = {
     draggable: {
       enabled: true,
@@ -88,7 +100,7 @@ export class DynamicWidgetsComponent {
   }
 
   postDash() {
-    const url = `http://localhost:3000/post_dash${this.test}`;
+    const url = `http://localhost:3000/post_dash${this.tab_number}`;
     this.http.post(url, this.dashboard).subscribe(data => {
       console.log(data);
     });
@@ -96,15 +108,13 @@ export class DynamicWidgetsComponent {
   }
 
   getDash() {
-    console.log('getdash');
-    console.log(this.test);
-    const url = (`http://localhost:3000/get_dash${this.test}`);
+    console.log('getdash' + this.tab_number);
+    console.log(this.tab_number);
+    const url = (`http://localhost:3000/get_dash${this.tab_number}`);
     this.http.get(url, { responseType: 'text'}).subscribe((data: any) => {
       this.dashboard = JSON.parse(data);
       console.log(this.dashboard);
+      this.cd.detectChanges();
     });
-    this.dashboard.push({cols: 0, rows: 0, x: 0, y: 0});
-    this.dashboard.splice(this.dashboard.length, 1);
-    console.log(this.dashboard);
   }
 }
