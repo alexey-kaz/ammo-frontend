@@ -33,7 +33,7 @@ export class LogWidgetComponent implements OnInit, OnDestroy {
 
   resizeSub: Subscription;
   data;
-  private _refreshIntervalId;
+  private refreshIntervalId;
   constructor(private http: HttpClient, private cd: ChangeDetectorRef) {}
   subscriptions: Subscription = new Subscription();
   change_sub: Subscription;
@@ -53,7 +53,7 @@ export class LogWidgetComponent implements OnInit, OnDestroy {
       // console.log(data);
       this.cd.detectChanges();
     });
-    this._refreshIntervalId = setInterval( () => {
+    this.refreshIntervalId = setInterval( () => {
       this.change_sub = this.http.get('http://localhost:3000/change',
         { responseType: 'text'}).subscribe((data: any) => {
         this.change = JSON.parse(data);
@@ -72,7 +72,7 @@ export class LogWidgetComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    clearInterval(this._refreshIntervalId);
+    clearInterval(this.refreshIntervalId);
     this.delete_sub = this.http.get('http://localhost:3000/delete', { responseType: 'text'}).subscribe((data: any) => {
       this.change = JSON.parse(data);
       // console.log(this.change);
