@@ -23,7 +23,7 @@ export class MainPageComponent implements OnInit {
     tab.id = this.tabs.length + 1;
     this.tabs.push(tab);
     this.tabSub.next(this.tabs);
-    this.http.get(url, { responseType: 'text'}).subscribe((data: any) => {
+    this.http.get(url, { responseType: 'text'}).subscribe(() => {
       console.log('new tab');
     });
     // this.postTab(tab);
@@ -33,7 +33,7 @@ export class MainPageComponent implements OnInit {
     const url = (`http://localhost:3000/del_tab${index}`);
     this.tabs.splice(index, 1);
     this.tabSub.next(this.tabs);
-    this.http.get(url, { responseType: 'text'}).subscribe((data: any) => {
+    this.http.get(url, { responseType: 'text'}).subscribe(() => {
       console.log('del tab');
     });
   }

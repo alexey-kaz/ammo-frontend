@@ -8,14 +8,15 @@
   <button nbButton (click)="addWidgetCPU()"><nb-icon icon="plus-circle-outline"></nb-icon>add widget CPU</button>
   <button nbButton (click)="addWidgetRAM()"><nb-icon icon="plus-circle-outline"></nb-icon>add widget RAM</button>
   <button nbButton (click)="addWidgetUptime()"><nb-icon icon="plus-circle-outline"></nb-icon>add widget Uptime</button>
+  <button nbButton (click)="addWidgetZabbix()"><nb-icon icon="plus-circle-outline"></nb-icon>add widget Zabbix</button>
 </div>
 
 <gridster [options]="gridsterOptions" class = "grid" >
   <gridster-item [item]="item" *ngFor="let item of dashboard" class = "griditem">
-      <button nbButton class="remove-button" (click)="removeItem($event, item)">
-        <nb-icon icon="close-square-outline"></nb-icon>
-        Delete Item
-      </button>
-      <app-parent-dynamic [widget]="item" [resizeEvent]="resizeEvent"></app-parent-dynamic>
+    <button nbButton class="remove-button" (click)="removeItem($event, item)">
+      <nb-icon icon="close-square-outline"></nb-icon>
+      Delete Item
+    </button>
+    <app-parent-dynamic [widget]="item" [resizeEvent]="resizeEvent"></app-parent-dynamic>
   </gridster-item>
 </gridster>

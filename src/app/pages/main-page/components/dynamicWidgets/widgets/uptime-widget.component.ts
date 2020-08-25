@@ -24,7 +24,7 @@ export class UptimeWidgetComponent implements OnInit, OnDestroy {
 
   resizeSub: Subscription;
   data;
-  private _refreshIntervalId;
+  private refreshIntervalId;
   constructor(private http: HttpClient, private cd: ChangeDetectorRef) {}
   subscriptions: Subscription = new Subscription();
   change_sub: Subscription;
@@ -51,7 +51,7 @@ export class UptimeWidgetComponent implements OnInit, OnDestroy {
       { responseType: 'text'}).subscribe((data: any) => {
       this.getData(data);
     });
-    this._refreshIntervalId = setInterval( () => {
+    this.refreshIntervalId = setInterval( () => {
 
       this.subscriptions = this.http.get('http://localhost:3000/uptime',
         { responseType: 'text'}).subscribe((data: any) => {

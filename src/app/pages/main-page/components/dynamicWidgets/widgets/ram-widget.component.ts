@@ -24,7 +24,7 @@ export class RAMWidgetComponent implements OnInit, OnDestroy {
 
   resizeSub: Subscription;
   data;
-  private _refreshIntervalId;
+  private refreshIntervalId;
   constructor(private http: HttpClient, private cd: ChangeDetectorRef) {}
   subscriptions: Subscription = new Subscription();
   change_sub: Subscription;
@@ -53,7 +53,7 @@ export class RAMWidgetComponent implements OnInit, OnDestroy {
       { responseType: 'text'}).subscribe((dataparse: any) => {
       this.getData(dataparse);
     });
-    this._refreshIntervalId = setInterval( () => {
+    this.refreshIntervalId = setInterval( () => {
         this.subscriptions = this.http.get('http://localhost:3000/ram',
           { responseType: 'text'}).subscribe((dataparse: any) => {
             this.getData(dataparse);
