@@ -87,6 +87,18 @@ export class DynamicWidgetsComponent implements OnInit {
     console.log(this.dashboard);
     this.postDash();
   }
+  addWidgetZabbix(): void {
+    this.dashboard.push({
+      type: 'widgetZabbix',
+      cols: 2,
+      id: UUID.UUID(),
+      rows: 2,
+      x: 0,
+      y: 0,
+    });
+    console.log(this.dashboard);
+    this.postDash();
+  }
 
   removeItem($event, item) {
     $event.preventDefault();

@@ -18,6 +18,8 @@ import {UptimeWidgetComponent} from './components/dynamicWidgets/widgets/uptime-
 import {HttpClientModule} from "@angular/common/http";
 import {TabContentComponent} from "./tab-content.component";
 import {ContentContainerDirective} from "./content-container.directive";
+import { ZabbixWidgetComponent } from './components/dynamicWidgets/widgets/zabbix-widget.component';
+import {CommonModule} from "@angular/common";
 
 @NgModule({
   imports: [
@@ -35,6 +37,7 @@ import {ContentContainerDirective} from "./content-container.directive";
     NbIconModule,
     GridsterModule,
     NbIconModule,
+    CommonModule,
   ],
   declarations: [
     MainPageComponent,
@@ -46,6 +49,7 @@ import {ContentContainerDirective} from "./content-container.directive";
     CPUWidgetComponent,
     RAMWidgetComponent,
     UptimeWidgetComponent,
+    ZabbixWidgetComponent,
   ],
 
 providers: [],
