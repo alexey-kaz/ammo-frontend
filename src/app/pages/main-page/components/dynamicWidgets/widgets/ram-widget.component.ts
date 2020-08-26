@@ -54,10 +54,10 @@ export class RAMWidgetComponent implements OnInit, OnDestroy {
       this.getData(dataparse);
     });
     this.refreshIntervalId = setInterval( () => {
-        this.subscriptions = this.http.get('http://localhost:3000/ram',
-          { responseType: 'text'}).subscribe((dataparse: any) => {
-            this.getData(dataparse);
-        });
+      this.subscriptions = this.http.get('http://localhost:3000/ram',
+        { responseType: 'text'}).subscribe((dataparse: any) => {
+        this.getData(dataparse);
+      });
     }, 1000);
 
   }

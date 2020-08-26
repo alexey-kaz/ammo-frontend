@@ -9,12 +9,13 @@
 
     <nb-tabset fullWidth style="background: white" (changeTab)="onTabChange()">
       <nb-tab *ngFor="let tab of tabs; let tabIndex = index;" tabTitle="Tab {{tabIndex+1}}" active="{{tabIndex===0}}">
-          <button nbButton (click)="removeTab(tabIndex);" style="background: #edf1f7">
-            <nb-icon icon="close-square-outline"></nb-icon>
-            Delete Tab {{tabIndex + 1}}
-          </button>
-          <app-dynamic-widgets id={{tabIndex+1}} *ngIf="tabIndex >= 0" [tab_number]=(tabIndex)></app-dynamic-widgets>
+        <button nbButton (click)="removeTab(tabIndex);" style="background: #edf1f7">
+          <nb-icon icon="close-square-outline"></nb-icon>
+          Delete Tab {{tabIndex + 1}}
+        </button>
+        <app-dynamic-widgets id={{tabIndex+1}} *ngIf="tabIndex >= 0" [tab_number]=(tabIndex)></app-dynamic-widgets>
       </nb-tab>
+
     </nb-tabset>
 
   </nb-layout-column>

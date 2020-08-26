@@ -53,35 +53,17 @@ export class ZabbixWidgetComponent implements OnInit, OnDestroy {
           "jsonrpc": "2.0",
           "method": "item.get",
           "params": {
-            "output": "extend",
             "search": {
-              "name": "Processor load (1 min average",
+              "key_": "system.cpu.load[all,avg1]",
             },
             "sortfield": "name",
           },
           "auth": auth.result,
-          "id": 1,
+          "id": 0,
         }).subscribe(data1 => {
             this.data = data1;
-            this.data = this.data.result[0].itemid;
+            this.data = this.data.result;
             console.log(this.data);
-            this.http.post('http://172.30.7.141:8081/api_jsonrpc.php', {
-              "jsonrpc": "2.0",
-              "method": "history.get",
-              "params": {
-                "output": "extend",
-                "itemids": this.data,
-                "sortfield": "clock",
-                "sortorder": "DESC",
-              },
-              "auth": auth.result,
-              "id": 1,
-            }).subscribe(data2 => {
-                this.data = data2;
-                console.log(this.data);
-              },
-              error => console.log(error),
-            );
           },
           error => console.log(error),
         );

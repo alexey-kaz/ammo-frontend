@@ -107,10 +107,6 @@ export class DynamicWidgetsComponent implements OnInit {
     this.postDash();
   }
 
-  emptyDashboard() {
-    this.dashboard = [];
-  }
-
   postDash() {
     const url = `http://localhost:3000/post_dash${this.tab_number}`;
     this.http.post(url, this.dashboard).subscribe(data => {

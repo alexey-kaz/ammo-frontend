@@ -52,14 +52,11 @@ export class UptimeWidgetComponent implements OnInit, OnDestroy {
       this.getData(data);
     });
     this.refreshIntervalId = setInterval( () => {
-
       this.subscriptions = this.http.get('http://localhost:3000/uptime',
         { responseType: 'text'}).subscribe((data: any) => {
         this.getData(data);
       });
-
     }, 1000);
-
   }
 
   ngOnDestroy(): void {

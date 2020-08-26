@@ -49,14 +49,14 @@ export class CPUWidgetComponent implements OnInit, OnDestroy {
 
     this.subscriptions = this.http.get('http://localhost:3000/cpu',
       { responseType: 'text'}).subscribe((data: any) => {
-        this.getData(data);
+      this.getData(data);
     });
     this.refreshIntervalId = setInterval( () => {
 
-        this.subscriptions = this.http.get('http://localhost:3000/cpu',
-          { responseType: 'text'}).subscribe((data: any) => {
-            this.getData(data);
-        });
+      this.subscriptions = this.http.get('http://localhost:3000/cpu',
+        { responseType: 'text'}).subscribe((data: any) => {
+        this.getData(data);
+      });
 
     }, 1000);
 
