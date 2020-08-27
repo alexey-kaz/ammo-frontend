@@ -36,6 +36,7 @@ export class ZabbixWidgetComponent implements OnInit, OnDestroy {
       }
     });
     let auth;
+    let host;
     this.http.post(`http://172.30.7.141:8081/api_jsonrpc.php`, {
       "jsonrpc": "2.0",
       "method": "user.login",
@@ -49,21 +50,47 @@ export class ZabbixWidgetComponent implements OnInit, OnDestroy {
         auth = data;
         console.log(data);
         console.log(data.result);
-        this.http.post('http://172.30.7.141:8081/api_jsonrpc.php', {
-          "jsonrpc": "2.0",
-          "method": "item.get",
-          "params": {
-            "search": {
-              "key_": "system.cpu.load[all,avg1]",
+        this.http.post('http://172.30.7.141:8081/api_jsonrpc.php',
+          {
+            "jsonrpc": "2.0",
+            "id": "1400175934496",
+            "auth": auth.result,
+            "method": "host.get",
+            "params": {
+              "selectInventory": true,
+              "selectItems": [
+                "name",
+                "lastvalue",
+                "units",
+                "itemid",
+                "lastclock",
+                "value_type",
+                "itemid",
+              ],
+              "output": "extend",
+              "expandDescription": 1,
+              "expandData": 1,
             },
-            "sortfield": "name",
-          },
-          "auth": auth.result,
-          "id": 0,
-        }).subscribe(data1 => {
-            this.data = data1;
-            this.data = this.data.result;
-            console.log(this.data);
+          }).subscribe(data1 => {
+            host = data1;
+            host = host.result[0].hostid;
+            console.log(host);
+            this.http.post('http://172.30.7.141:8081/api_jsonrpc.php',
+              {
+                "jsonrpc": "2.0",
+                "auth": auth.result,
+                "method": "item.get",
+                "params": {
+                  "output": "extend",
+                  "hostids": host,
+                  "sortfield": "name",
+                },
+              }).subscribe(data2 => {
+                this.data = data2;
+                console.log(this.data);
+              },
+              error => console.log(error),
+            );
           },
           error => console.log(error),
         );

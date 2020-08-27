@@ -2,14 +2,7 @@
   <nb-layout-column>
     <nb-card>
       <nb-card-body>
-        <label>
-          <input nbInput placeholder="Input Virtual Machine" (keyup.enter)="onKey($event)">
-        </label>
-        <div>
-          <nb-select placeholder="Select VM" [(selected)]="selectedOption">
-            <nb-option *ngFor="let val of values" [value]="val"> {{val}} </nb-option>
-          </nb-select>
-        </div>
+        <app-user-table></app-user-table>
       </nb-card-body>
     </nb-card>
   </nb-layout-column>

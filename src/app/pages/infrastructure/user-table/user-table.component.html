@@ -1,0 +1,61 @@
+  <header>
+    <div>
+      <h1>Infrastructure Table</h1>
+    </div>
+  </header>
+  <div>
+    <button nbButton (click)="getInfTable()">Get Infrastructure Table</button>
+    <button nbButton (click)="clearInfTable()">Clear Infrastructure Table</button>
+  </div>
+  <form [formGroup]="userTable">
+      <table class="table table-border" [ngClass]="{'table-dark': mode}">
+        <thead class="text-nowrap">
+          <tr>
+            <td>Virtual Machine</td>
+            <td>IP Address</td>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container formArrayName="tableRows" *ngFor="let group of getFormControls.controls ; let i=index">
+            <tr *ngIf="group.get('isEditable').value" [formGroupName]="i">
+              <td>
+                <nb-form-field>
+                  <label>
+                    <input nbInput type="text" formControlName="vm">
+                  </label>
+                </nb-form-field>
+              </td>
+              <td>
+                <nb-form-field>
+                  <label>
+                    <input nbInput type="text" formControlName="ip">
+                  </label>
+                </nb-form-field>
+              </td>
+              <td>
+                <nb-icon icon="close-square-outline" (click)="deleteRow(i)">delete_forever</nb-icon>
+                <nb-icon icon="checkmark-outline" (click)="doneRow(group)">done</nb-icon>
+              </td>
+            </tr>
+            <tr *ngIf="!group.get('isEditable').value" >
+              <td>
+                {{group.get('vm').value}}
+              </td>
+              <td>
+                {{group.get('ip').value}}
+              </td>
+              <td>
+                <nb-icon icon="edit-2-outline" (click)="editRow(group)">edit</nb-icon>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+      <div class="action-container">
+        <button nbButton type="submit" (click)="addRow()">Add row</button>
+      </div>
+    </form>
+    <div class="output">
+      <p>Form Data:  {{userTable.value | json}}</p>
+    </div>
+
