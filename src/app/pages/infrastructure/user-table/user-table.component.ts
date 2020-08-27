@@ -13,7 +13,28 @@ export class UserTableComponent implements OnInit {
   control: FormArray;
   mode: boolean;
   touchedRows: any;
-  constructor(private fb: FormBuilder, private http: HttpClient) { }
+  auth: string;
+  zabbix_url: string;
+  zabbix_user: string;
+  zabbix_pass: string;
+  constructor(private fb: FormBuilder, private http: HttpClient) {
+    this.http.get("http://localhost:3000/get_zabbix_credentials").subscribe((data: any) => {
+        console.log('get_zabbix_credentials');
+        console.log(data);
+        this.zabbix_url = 'http://' + data['zabbix_address'] + ':' + data['zabbix_port'] + '/api_jsonrpc.php';
+        this.zabbix_user = data['zabbix_user'];
+        this.zabbix_pass = data['zabbix_pass'];
+      },
+      error => console.log(error),
+    );
+    this.http.get("http://localhost:3000/get_auth_token").subscribe((data: any) => {
+        console.log('get_zabbix_auth');
+        console.log(data);
+        this.auth = data;
+      },
+      error => console.log(error),
+    );
+  }
 
   ngOnInit(): void {
     this.touchedRows = [];
@@ -43,6 +64,19 @@ export class UserTableComponent implements OnInit {
   deleteRow(index: number) {
     const control =  this.userTable.get('tableRows') as FormArray;
     control.removeAt(index);
+    // this.http.post(this.zabbix_url, {
+    //   "jsonrpc": "2.0",
+    //   "method": "host.create",
+    //   "params": {
+    //     "hostid": control.value['hostid'],
+    //   },
+    //   "auth": this.auth,
+    //   "id": 1,
+    // }).subscribe((data: any) => {
+    //     console.log(data);
+    //   },
+    //   error => console.log(error),
+    // );
     this.postInfTable();
   }
 
@@ -52,6 +86,45 @@ export class UserTableComponent implements OnInit {
 
   doneRow(group: AbstractControl) {
     group.get('isEditable').setValue(false);
+
+    console.log(group.value['vm']);
+    console.log(group.value['ip']);
+    console.log('test zabbix host create');
+    // this.http.post(this.url, {
+    //   "jsonrpc": "2.0",
+    //   "method": "host.create",
+    //   "params": {
+    //     "host": "Linux server",
+    //     "interfaces": [
+    //       {
+    //         "type": 1,
+    //         "main": 1,
+    //         "useip": 1,
+    //         "ip": this.values[0],
+    //         "dns": "",
+    //         "port": "10050",
+    //       },
+    //     ],
+    //     "groups": [
+    //       {
+    //         "groupid": "6",
+    //       },
+    //     ],
+    //     "templates": [
+    //       {
+    //         "templateid": "10186",
+    //       },
+    //     ],
+    //   },
+    //   "auth": this.auth,
+    //   "id": 1,
+    // }).subscribe((data: any) => {
+    //     this.host_id = data['result']['hostids'];
+    //     console.log(data);
+    //   },
+    //   error => console.log(error),
+    // );
+    // group.value['hostid'] = this.host_id;
     this.postInfTable();
   }
 
