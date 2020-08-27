@@ -24,8 +24,12 @@ export class InfrastructureComponent {
       "id": this.id,
       "auth": null,
     }).subscribe((data: any) => {
-        this.auth = data['result'];
         console.log(data);
+        this.http.post("http://localhost:3000/post_auth_token", data).subscribe((data1: any) => {
+            console.log('post_auth_token');
+          },
+          error => console.log(error),
+        );
       },
       error => console.log(error),
     );
