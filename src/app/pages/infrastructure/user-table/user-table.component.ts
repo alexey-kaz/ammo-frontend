@@ -18,7 +18,7 @@ export class UserTableComponent implements OnInit {
   zabbix_user: string;
   zabbix_pass: string;
   constructor(private fb: FormBuilder, private http: HttpClient) {
-    this.http.get("http://localhost:3000/get_zabbix_credentials").subscribe((data: any) => {
+    this.http.get("http://localhost:3000/get_zabbix_credentials", { responseType: 'text'}).subscribe((data: any) => {
         console.log('get_zabbix_credentials');
         console.log(data);
         this.zabbix_url = 'http://' + data['zabbix_address'] + ':' + data['zabbix_port'] + '/api_jsonrpc.php';
@@ -27,7 +27,7 @@ export class UserTableComponent implements OnInit {
       },
       error => console.log(error),
     );
-    this.http.get("http://localhost:3000/get_auth_token").subscribe((data: any) => {
+    this.http.get("http://localhost:3000/get_auth_token", { responseType: 'text'}).subscribe((data: any) => {
         console.log('get_zabbix_auth');
         console.log(data);
         this.auth = data;
@@ -63,6 +63,10 @@ export class UserTableComponent implements OnInit {
 
   deleteRow(index: number) {
     const control =  this.userTable.get('tableRows') as FormArray;
+    const vm = control.at(index).value['vm'];
+    console.log(vm);
+    const ip = control.at(index).value['ip'];
+    console.log(ip);
     control.removeAt(index);
     // this.http.post(this.zabbix_url, {
     //   "jsonrpc": "2.0",
@@ -77,7 +81,7 @@ export class UserTableComponent implements OnInit {
     //   },
     //   error => console.log(error),
     // );
-    this.postInfTable();
+    this.postInfTable('delete', vm, ip);
   }
 
   editRow(group: AbstractControl) {
@@ -125,12 +129,12 @@ export class UserTableComponent implements OnInit {
     //   error => console.log(error),
     // );
     // group.value['hostid'] = this.host_id;
-    this.postInfTable();
+    this.postInfTable('create', group.value['vm'], group.value['ip']);
   }
 
-  postInfTable() {
-    const url = `http://localhost:3000/post_infrastructure_table`;
-    this.http.post(url, this.userTable.value).subscribe(data => {
+  postInfTable(method: string, vm: any, ip: any) {
+    const url = `http://localhost:3000/post_infrastructure_table${method}`;
+    this.http.post(url, {'vm': vm, 'ip': ip}).subscribe(data => {
       console.log(data);
     });
     console.log('postInfTable');
@@ -141,8 +145,7 @@ export class UserTableComponent implements OnInit {
   }
 
   get getFormControls() {
-    const control = this.userTable.get('tableRows') as FormArray;
-    return control;
+    return this.userTable.get('tableRows') as FormArray;
   }
 
   submitForm() {

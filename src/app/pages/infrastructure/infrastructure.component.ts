@@ -1,8 +1,5 @@
 import {Component} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Tab} from "../main-page/tab.model";
-import {DynamicWidgetsComponent} from "../main-page/components/dynamicWidgets/dynamicWidgets.component";
-
 @Component({
   selector: 'ngx-infrastructure',
   templateUrl: './infrastructure.component.html',
@@ -13,26 +10,6 @@ export class InfrastructureComponent {
   host_id = null;
   id = 0;
   constructor(private http: HttpClient) {
-    console.log('test zabbix connection');
-    this.http.post(this.url, {
-      "jsonrpc": "2.0",
-      "method": "user.login",
-      "params": {
-        "user": "Admin",
-        "password": "zabbix",
-      },
-      "id": this.id,
-      "auth": null,
-    }).subscribe((data: any) => {
-        console.log(data);
-        this.http.post("http://localhost:3000/post_auth_token", data).subscribe((data1: any) => {
-            console.log('post_auth_token');
-          },
-          error => console.log(error),
-        );
-      },
-      error => console.log(error),
-    );
   }
   values = new Array<string>();
   selectedOption;
