@@ -44,10 +44,6 @@ export class UserTableComponent implements OnInit {
     this.addRow();
   }
 
-  ngAfterOnInit() {
-    this.control = this.userTable.get('tableRows') as FormArray;
-  }
-
   initiateForm(): FormGroup {
     return this.fb.group({
       vm: ['', Validators.required],
@@ -68,19 +64,6 @@ export class UserTableComponent implements OnInit {
     const ip = control.at(index).value['ip'];
     console.log(ip);
     control.removeAt(index);
-    // this.http.post(this.zabbix_url, {
-    //   "jsonrpc": "2.0",
-    //   "method": "host.create",
-    //   "params": {
-    //     "hostid": control.value['hostid'],
-    //   },
-    //   "auth": this.auth,
-    //   "id": 1,
-    // }).subscribe((data: any) => {
-    //     console.log(data);
-    //   },
-    //   error => console.log(error),
-    // );
     this.postInfTable('delete', vm, ip);
   }
 
@@ -90,45 +73,8 @@ export class UserTableComponent implements OnInit {
 
   doneRow(group: AbstractControl) {
     group.get('isEditable').setValue(false);
-
-    console.log(group.value['vm']);
-    console.log(group.value['ip']);
+    console.log(this.userTable.value['tableRows']);
     console.log('test zabbix host create');
-    // this.http.post(this.url, {
-    //   "jsonrpc": "2.0",
-    //   "method": "host.create",
-    //   "params": {
-    //     "host": "Linux server",
-    //     "interfaces": [
-    //       {
-    //         "type": 1,
-    //         "main": 1,
-    //         "useip": 1,
-    //         "ip": this.values[0],
-    //         "dns": "",
-    //         "port": "10050",
-    //       },
-    //     ],
-    //     "groups": [
-    //       {
-    //         "groupid": "6",
-    //       },
-    //     ],
-    //     "templates": [
-    //       {
-    //         "templateid": "10186",
-    //       },
-    //     ],
-    //   },
-    //   "auth": this.auth,
-    //   "id": 1,
-    // }).subscribe((data: any) => {
-    //     this.host_id = data['result']['hostids'];
-    //     console.log(data);
-    //   },
-    //   error => console.log(error),
-    // );
-    // group.value['hostid'] = this.host_id;
     this.postInfTable('create', group.value['vm'], group.value['ip']);
   }
 
@@ -140,31 +86,22 @@ export class UserTableComponent implements OnInit {
     console.log('postInfTable');
   }
 
-  saveUserDetails() {
-    console.log(this.userTable.value);
-  }
 
   get getFormControls() {
     return this.userTable.get('tableRows') as FormArray;
   }
 
-  submitForm() {
-    const control = this.userTable.get('tableRows') as FormArray;
-    this.touchedRows = control.controls.filter(row => row.touched).map(row => row.value);
-    console.log(this.touchedRows);
-  }
-
   getInfTable() {
     const control =  this.userTable.get('tableRows') as FormArray;
-    this.clearInfTable();
+    let value;
     this.http.get('http://localhost:3000/get_infrastructure_table',
       { responseType: 'text'}).subscribe((data: any) => {
-        for (let i = 0; i < JSON.parse(data).tableRows.length - 1; i++) {
-          control.push(this.initiateForm());
-        }
-      this.userTable.setValue(JSON.parse(data));
+      // this.userTable.setValue(JSON.parse(data));
       console.log(data);
+      value = {'vm': data['vm'], 'ip': data['ip'], "isEditable": false };
+      control.insert(control.length, value);
     });
+    console.log(control);
   }
 
   clearInfTable() {

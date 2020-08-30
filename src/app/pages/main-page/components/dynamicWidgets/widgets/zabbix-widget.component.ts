@@ -30,29 +30,10 @@ export class ZabbixWidgetComponent implements OnInit, OnDestroy {
         console.log(widget);
       }
     });
-    this.http.get('http://localhost:3000/get_auth_token',
+    this.http.get('http://localhost:3000/get_zabbix_cpu',
       { responseType: 'text'}).subscribe((data: any) => {
-      this.auth = data;
-      console.log(data);
+      console.log(JSON.parse(data));
     });
-    console.log(this.auth);
-    this.http.post('http://172.30.7.141:8081/api_jsonrpc.php',
-      {
-        "jsonrpc": "2.0",
-        "auth": this.auth,
-        "method": "item.get",
-        "params": {
-          "search": {
-            "key_": "cpu.util",
-          },
-          "output": "extend",
-          "sortfield": "name",
-        },
-      }).subscribe((data: any) => {
-        console.log(data);
-      },
-      error => console.log(error),
-    );
   }
   ngOnDestroy() {
     this.resizeSub.unsubscribe();
